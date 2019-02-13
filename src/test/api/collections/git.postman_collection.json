@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "getUser",
+			"name": "validateUser",
 			"event": [
 				{
 					"listen": "test",
@@ -16,24 +16,28 @@
 						"type": "text/javascript",
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);",
-							"var usersURL = \"https://api.github.com/users/jogijatin15\"",
-							"tests[\"Testcase 1 - Validate github's user's url\"] = jsonData.url === usersURL;",
-							"tests[\"Testcase 2 - Valite the user's login name\"] = jsonData.login === postman.getEnvironmentVariable(\"githubuser\");",
-							"tests[\"Testcase 3 - Validate the user's login id\"] = jsonData.id === 17865993;",
-							"tests[\"Testcase 4 - Validate that type of github account\"] = jsonData.type === \"User\";",
-							"tests[\"Testcase 5 - Validate the user's html url \"] = jsonData.html_url === \"https://github.com/jogijatin15\";"
+							"var usersURL = \"http://10.120.101.126:3000/api/users/username-check?username=testuser\"",
+							"tests[\"Testcase 1 - Validate User\"] = jsonData === true"					
 						]
 					}
 				}
-			],
+			],   
 			"request": {
-				"url": "{{githubapi}}/{{githubuser}}",
+				"url": "{{appapi}}",
 				"method": "GET",
-				"header": [],
+				"headers": "Authorization: Basic YWRtaW46dGVzdDEyMw==\n",
+				"headerData": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46dGVzdDEyMw==",
+						"description": "",
+						"enabled": true
+					}
+				],
 				"body": {},
 				"description": ""
 			},
 			"response": []
-		}
-	]
+		},
+		]
 }
