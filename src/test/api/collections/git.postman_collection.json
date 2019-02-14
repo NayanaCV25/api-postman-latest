@@ -8,16 +8,16 @@
 	},
 	"item": [
 		{
-			"name": "validateUser",
+			"name": "validateTestUser",
 			"event": [
-				{
+				{ 
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);",
 							"var usersURL = \"http://10.120.101.126:3000/api/users/username-check?username=testuser\"",
-							"tests[\"Testcase 1 - Validate User\"] = jsonData === true"					
+							"tests[\"Testcase 1 - Validate Test User\"] = jsonData === true"								
 						]
 					}
 				}
@@ -25,13 +25,11 @@
 			"request": {
 				"url": "{{appapi}}",
 				"method": "GET",
-				"headers": "Authorization: Basic YWRtaW46dGVzdDEyMw==\n",
-				"headerData": [
+				"header": [
 					{
 						"key": "Authorization",
 						"value": "Basic YWRtaW46dGVzdDEyMw==",
-						"description": "",
-						"enabled": true
+						"description": ""
 					}
 				],
 				"body": {},
@@ -40,7 +38,7 @@
 			"response": []
 		},
 		{
-			"name": "adminCheckUser",
+			"name": "validateAdminUser",
 			"event": [
 				{
 					"listen": "test",
@@ -48,22 +46,51 @@
 						"type": "text/javascript",
 						"exec": [
 							"var jsonData1 = JSON.parse(responseBody);",
-							"var usersURLnew = \"http://10.120.101.126:3000/api/me\"",
-							"tests[\"Testcase 2 - Role\"] = jsonData1.role === \"ADMIN\""					
+							"var usersURL = \"http://10.120.101.126:3000/api/users/username-check?username=admin\"",
+							"tests[\"Testcase 2 - Validate Admin User\"] = jsonData1 === true"						
 						]
 					} 
 				}
 			], 
 			"request": {
 				"url": "{{appapinew}}",
-				"method": "GET",
-				"headers": "Authorization: Basic YWRtaW46dGVzdDEyMw==\n",
-				"headerData": [
+				"method": "GET",			
+				"header": [
 					{
 						"key": "Authorization",
 						"value": "Basic YWRtaW46dGVzdDEyMw==",
-						"description": "",
-						"enabled": true
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "appapiadminrole",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData2 = JSON.parse(responseBody);",
+							"var usersURL = \"http://10.120.101.126:3000/api/users/1/\"",
+							"tests[\"Testcase 3 - Validate Admin Role\"] = jsonData2.role === \"ADMIN\"",						
+							"tests[\"Testcase 4 - Get User Name\"] = jsonData2.name === \"Administrator\""	
+						]
+					} 
+				}
+			], 
+			"request": {
+				"url": "{{appapiadminrole}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46dGVzdDEyMw==",
+						"description": ""
 					}
 				],
 				"body": {},
