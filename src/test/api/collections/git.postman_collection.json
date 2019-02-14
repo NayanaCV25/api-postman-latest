@@ -39,5 +39,37 @@
 			},
 			"response": []
 		},
-		]
+		{
+			"name": "adminCheckUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData1 = JSON.parse(responseBody);",
+							"var usersURLnew = \"http://10.120.101.126:3000/api/me\"",
+							"tests[\"Testcase 2 - Role\"] = jsonData1.role === \"ADMIN\""					
+						]
+					} 
+				}
+			], 
+			"request": {
+				"url": "{{appapinew}}",
+				"method": "GET",
+				"headers": "Authorization: Basic YWRtaW46dGVzdDEyMw==\n",
+				"headerData": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46dGVzdDEyMw==",
+						"description": "",
+						"enabled": true
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
 }
